@@ -1405,7 +1405,7 @@ class ListEntitiesClimateResponse final : public InfoResponseProtoMessage {
 class ClimateStateResponse final : public StateResponseProtoMessage {
  public:
   static constexpr uint8_t MESSAGE_TYPE = 47;
-  static constexpr uint8_t ESTIMATED_SIZE = 68;
+  static constexpr uint8_t ESTIMATED_SIZE = 104;
 #ifdef HAS_PROTO_MESSAGE_DUMP
   const char *message_name() const override { return "climate_state_response"; }
 #endif
@@ -1422,6 +1422,14 @@ class ClimateStateResponse final : public StateResponseProtoMessage {
   StringRef custom_preset{};
   float current_humidity{0.0f};
   float target_humidity{0.0f};
+  // additional fields
+  float visual_min_temperature{0.0f};
+  float visual_max_temperature{0.0f};
+  float visual_target_temperature_step{0.0f};
+  float visual_current_temperature_step{0.0f};
+  float visual_min_humidity{0.0f};
+  float visual_max_humidity{0.0f};
+  // end additional fields
   void encode(ProtoWriteBuffer &buffer) const;
   uint32_t calculate_size() const;
 #ifdef HAS_PROTO_MESSAGE_DUMP

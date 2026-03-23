@@ -1446,6 +1446,14 @@ void ClimateStateResponse::encode(ProtoWriteBuffer &buffer) const {
 #ifdef USE_DEVICES
   buffer.encode_uint32(16, this->device_id);
 #endif
+  // additional
+  buffer.encode_float(17, this->visual_min_temperature);
+  buffer.encode_float(18, this->visual_max_temperature);
+  buffer.encode_float(19, this->visual_target_temperature_step);
+  buffer.encode_float(20, this->visual_current_temperature_step);
+  buffer.encode_float(21, this->visual_min_humidity);
+  buffer.encode_float(22, this->visual_max_humidity);
+  // end additional
 }
 uint32_t ClimateStateResponse::calculate_size() const {
   uint32_t size = 0;
@@ -1466,6 +1474,14 @@ uint32_t ClimateStateResponse::calculate_size() const {
 #ifdef USE_DEVICES
   size += ProtoSize::calc_uint32(2, this->device_id);
 #endif
+  // additional
+  size += ProtoSize::calc_float(2, this->visual_min_temperature);
+  size += ProtoSize::calc_float(2, this->visual_max_temperature);
+  size += ProtoSize::calc_float(2, this->visual_target_temperature_step);
+  size += ProtoSize::calc_float(2, this->visual_current_temperature_step);
+  size += ProtoSize::calc_float(2, this->visual_min_humidity);
+  size += ProtoSize::calc_float(2, this->visual_max_humidity);
+  // end additional
   return size;
 }
 bool ClimateCommandRequest::decode_varint(uint32_t field_id, proto_varint_value_t value) {

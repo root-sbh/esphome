@@ -1535,6 +1535,14 @@ const char *ClimateStateResponse::dump_to(DumpBuffer &out) const {
 #ifdef USE_DEVICES
   dump_field(out, "device_id", this->device_id);
 #endif
+  // additional
+  dump_field(out, "visual_min_temperature", this->visual_min_temperature);
+  dump_field(out, "visual_max_temperature", this->visual_max_temperature);
+  dump_field(out, "visual_target_temperature_step", this->visual_target_temperature_step);
+  dump_field(out, "visual_current_temperature_step", this->visual_current_temperature_step);
+  dump_field(out, "visual_min_humidity", this->visual_min_humidity);
+  dump_field(out, "visual_max_humidity", this->visual_max_humidity);
+  // end additional
   return out.c_str();
 }
 const char *ClimateCommandRequest::dump_to(DumpBuffer &out) const {
