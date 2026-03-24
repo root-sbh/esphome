@@ -232,9 +232,9 @@ class Climate : public EntityBase {
   void set_visual_temperature_step_override(float target, float current);
   void set_visual_min_humidity_override(float visual_min_humidity_override);
   void set_visual_max_humidity_override(float visual_max_humidity_override);
+#endif
   void clear_visual_info_override();
   bool get_visual_info_override() const { return this->visual_info_override_; }
-#endif
 
   /// Check if a custom fan mode is currently active.
   bool has_custom_fan_mode() const { return this->custom_fan_mode_ != nullptr; }
@@ -351,8 +351,8 @@ class Climate : public EntityBase {
   float visual_current_temperature_step_override_{NAN};
   float visual_min_humidity_override_{NAN};
   float visual_max_humidity_override_{NAN};
-  bool visual_info_override_{false};
 #endif
+  bool visual_info_override_{false};
 
  private:
   /** The active custom fan mode (private - enforces use of safe setters).

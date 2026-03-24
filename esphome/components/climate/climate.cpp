@@ -486,23 +486,25 @@ void Climate::publish_state() {
 ClimateTraits Climate::get_traits() {
   auto traits = this->traits();
 #ifdef USE_CLIMATE_VISUAL_OVERRIDES
+  bool changed = false;
   if (!std::isnan(this->visual_min_temperature_override_)) {
-    traits.set_visual_min_temperature(this->visual_min_temperature_override_);
+    changed |= traits.set_visual_min_temperature(this->visual_min_temperature_override_);
   }
   if (!std::isnan(this->visual_max_temperature_override_)) {
-    traits.set_visual_max_temperature(this->visual_max_temperature_override_);
+    changed |= traits.set_visual_max_temperature(this->visual_max_temperature_override_);
   }
   if (!std::isnan(this->visual_target_temperature_step_override_)) {
-    traits.set_visual_target_temperature_step(this->visual_target_temperature_step_override_);
-    traits.set_visual_current_temperature_step(this->visual_current_temperature_step_override_);
+    changed |= traits.set_visual_target_temperature_step(this->visual_target_temperature_step_override_);
+    changed |= traits.set_visual_current_temperature_step(this->visual_current_temperature_step_override_);
   }
   if (!std::isnan(this->visual_min_humidity_override_)) {
-    traits.set_visual_min_humidity(this->visual_min_humidity_override_);
+    changed |= traits.set_visual_min_humidity(this->visual_min_humidity_override_);
   }
   if (!std::isnan(this->visual_max_humidity_override_)) {
-    traits.set_visual_max_humidity(this->visual_max_humidity_override_);
+    changed |= traits.set_visual_max_humidity(this->visual_max_humidity_override_);
   }
 #endif
+  this->visual_info_override_ = changed;
   return traits;
 }
 

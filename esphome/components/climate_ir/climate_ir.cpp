@@ -24,9 +24,10 @@ climate::ClimateTraits ClimateIR::traits() {
   if (this->supports_fan_only_)
     traits.add_supported_mode(climate::CLIMATE_MODE_FAN_ONLY);
 
-  traits.set_visual_min_temperature(this->minimum_temperature_);
-  traits.set_visual_max_temperature(this->maximum_temperature_);
-  traits.set_visual_temperature_step(this->temperature_step_);
+  bool changed = false;
+  changed |= traits.set_visual_min_temperature(this->minimum_temperature_);
+  changed |= traits.set_visual_max_temperature(this->maximum_temperature_);
+  changed |= traits.set_visual_temperature_step(this->temperature_step_);
   traits.set_supported_fan_modes(this->fan_modes_);
   traits.set_supported_swing_modes(this->swing_modes_);
   traits.set_supported_presets(this->presets_);

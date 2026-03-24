@@ -208,32 +208,62 @@ class ClimateTraits {
   const ClimateSwingModeMask &get_supported_swing_modes() const { return this->supported_swing_modes_; }
 
   float get_visual_min_temperature() const { return this->visual_min_temperature_; }
-  void set_visual_min_temperature(float visual_min_temperature) {
+  bool set_visual_min_temperature(float visual_min_temperature) {
+    if (this->visual_min_temperature_ == visual_min_temperature)
+      return false;
     this->visual_min_temperature_ = visual_min_temperature;
+    return true;
   }
   float get_visual_max_temperature() const { return this->visual_max_temperature_; }
-  void set_visual_max_temperature(float visual_max_temperature) {
+  bool set_visual_max_temperature(float visual_max_temperature) {
+    if (this->visual_max_temperature_ == visual_max_temperature)
+      return false;
     this->visual_max_temperature_ = visual_max_temperature;
+    return true;
   }
   float get_visual_target_temperature_step() const { return this->visual_target_temperature_step_; }
   float get_visual_current_temperature_step() const { return this->visual_current_temperature_step_; }
-  void set_visual_target_temperature_step(float temperature_step) {
+  bool set_visual_target_temperature_step(float temperature_step) {
+    if (this->visual_target_temperature_step_ == temperature_step)
+      return false;
     this->visual_target_temperature_step_ = temperature_step;
+    return true;
   }
-  void set_visual_current_temperature_step(float temperature_step) {
+  bool set_visual_current_temperature_step(float temperature_step) {
+    if (this->visual_current_temperature_step_ == temperature_step)
+      return false;
     this->visual_current_temperature_step_ = temperature_step;
+    return true;
   }
-  void set_visual_temperature_step(float temperature_step) {
-    this->visual_target_temperature_step_ = temperature_step;
-    this->visual_current_temperature_step_ = temperature_step;
+  bool set_visual_temperature_step(float temperature_step) {
+    bool changed = false;
+    if (this->visual_target_temperature_step_ != temperature_step) {
+      this->visual_target_temperature_step_ = temperature_step;
+      changed = true;
+    }
+    if (this->visual_current_temperature_step_ != temperature_step) {
+      this->visual_current_temperature_step_ = temperature_step;
+      changed = true;
+    }
+    return changed;
   }
   int8_t get_target_temperature_accuracy_decimals() const;
   int8_t get_current_temperature_accuracy_decimals() const;
 
   float get_visual_min_humidity() const { return this->visual_min_humidity_; }
-  void set_visual_min_humidity(float visual_min_humidity) { this->visual_min_humidity_ = visual_min_humidity; }
+  bool set_visual_min_humidity(float visual_min_humidity) {
+    if (this->visual_min_humidity_ == visual_min_humidity)
+      return false;
+    this->visual_min_humidity_ = visual_min_humidity;
+    return true;
+  }
   float get_visual_max_humidity() const { return this->visual_max_humidity_; }
-  void set_visual_max_humidity(float visual_max_humidity) { this->visual_max_humidity_ = visual_max_humidity; }
+  bool set_visual_max_humidity(float visual_max_humidity) {
+    if (this->visual_max_humidity_ == visual_max_humidity)
+      return false;
+    this->visual_max_humidity_ = visual_max_humidity;
+    return true;
+  }
 
  protected:
   void set_mode_support_(climate::ClimateMode mode, bool supported) {
@@ -283,6 +313,7 @@ class ClimateTraits {
   float visual_current_temperature_step_{0.1};
   float visual_min_humidity_{30};
   float visual_max_humidity_{99};
+  bool visual_info_override_{false};
 
   climate::ClimateModeMask supported_modes_{climate::CLIMATE_MODE_OFF};
   climate::ClimateFanModeMask supported_fan_modes_;
