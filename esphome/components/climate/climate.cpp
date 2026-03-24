@@ -503,8 +503,8 @@ ClimateTraits Climate::get_traits() {
   if (!std::isnan(this->visual_max_humidity_override_)) {
     changed |= traits.set_visual_max_humidity(this->visual_max_humidity_override_);
   }
-#endif
   this->visual_info_override_ = changed;
+#endif
   return traits;
 }
 
