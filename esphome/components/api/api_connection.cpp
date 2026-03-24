@@ -678,6 +678,10 @@ uint16_t APIConnection::try_send_text_sensor_info(EntityBase *entity, APIConnect
 
 #ifdef USE_CLIMATE
 bool APIConnection::send_climate_state(climate::Climate *climate) {
+  if (climate->get_visual_info_override()) {
+    this->schedule_message_(climate, ListEntitiesClimateResponse::MESSAGE_TYPE, ListEntitiesClimateResponse::ESTIMATED_SIZE);
+    climate->clear_visual_info_override();
+  }
   return this->send_message_smart_(climate, ClimateStateResponse::MESSAGE_TYPE, ClimateStateResponse::ESTIMATED_SIZE);
 }
 uint16_t APIConnection::try_send_climate_state(EntityBase *entity, APIConnection *conn, uint32_t remaining_size) {
