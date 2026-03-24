@@ -535,10 +535,11 @@ void Climate::set_visual_max_humidity_override(float visual_max_humidity_overrid
   this->visual_info_override_ = true;
 }
 
+#endif
+
 void Climate::clear_visual_info_override() {
   this->visual_info_override_ = false;
 }
-#endif
 
 ClimateCall Climate::make_call() { return ClimateCall(this); }
 
