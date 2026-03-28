@@ -1560,6 +1560,9 @@ const char *ClimateStateResponse::dump_to(DumpBuffer &out) const {
 #ifdef USE_DEVICES
   dump_field(out, ESPHOME_PSTR("device_id"), this->device_id);
 #endif
+  dump_field(out, ESPHOME_PSTR("min_temperature"), this->min_temperature);
+  dump_field(out, ESPHOME_PSTR("max_temperature"), this->max_temperature);
+  dump_field(out, ESPHOME_PSTR("target_temperature_step"), this->target_temperature_step);
   return out.c_str();
 }
 const char *ClimateCommandRequest::dump_to(DumpBuffer &out) const {

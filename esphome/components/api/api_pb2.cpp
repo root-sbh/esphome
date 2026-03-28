@@ -1446,6 +1446,9 @@ void ClimateStateResponse::encode(ProtoWriteBuffer &buffer) const {
 #ifdef USE_DEVICES
   buffer.encode_uint32(16, this->device_id);
 #endif
+  buffer.encode_float(17, this->min_temperature);
+  buffer.encode_float(18, this->max_temperature);
+  buffer.encode_float(19, this->target_temperature_step);
 }
 uint32_t ClimateStateResponse::calculate_size() const {
   uint32_t size = 0;
@@ -1466,6 +1469,9 @@ uint32_t ClimateStateResponse::calculate_size() const {
 #ifdef USE_DEVICES
   size += ProtoSize::calc_uint32(2, this->device_id);
 #endif
+  size += ProtoSize::calc_float(2, this->min_temperature);
+  size += ProtoSize::calc_float(2, this->max_temperature);
+  size += ProtoSize::calc_float(2, this->target_temperature_step);
   return size;
 }
 bool ClimateCommandRequest::decode_varint(uint32_t field_id, proto_varint_value_t value) {
