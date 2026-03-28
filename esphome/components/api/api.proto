@@ -1113,6 +1113,9 @@ message ClimateStateResponse {
   float current_humidity = 14;
   float target_humidity = 15;
   uint32 device_id = 16 [(field_ifdef) = "USE_DEVICES"];
+  float min_temperature = 17;
+  float max_temperature = 18;
+  float target_temperature_step = 19;
 }
 message ClimateCommandRequest {
   option (id) = 48;
