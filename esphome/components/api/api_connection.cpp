@@ -712,6 +712,9 @@ uint16_t APIConnection::try_send_climate_state(EntityBase *entity, APIConnection
     resp.current_humidity = climate->current_humidity;
   if (traits.has_feature_flags(climate::CLIMATE_SUPPORTS_TARGET_HUMIDITY))
     resp.target_humidity = climate->target_humidity;
+  resp.min_temperature = traits.get_visual_min_temperature();
+  resp.max_temperature = traits.get_visual_max_temperature();
+  resp.target_temperature_step = traits.get_visual_target_temperature_step();
   return fill_and_encode_entity_state(climate, resp, conn, remaining_size);
 }
 uint16_t APIConnection::try_send_climate_info(EntityBase *entity, APIConnection *conn, uint32_t remaining_size) {
