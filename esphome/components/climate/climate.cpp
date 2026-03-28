@@ -472,6 +472,9 @@ void Climate::publish_state() {
   if (traits.has_feature_flags(climate::CLIMATE_SUPPORTS_TARGET_HUMIDITY)) {
     ESP_LOGV(TAG, "  Target Humidity: %.0f%%", this->target_humidity);
   }
+  ESP_LOGV(TAG, "  Visual Min Temperature: %.1f°C", traits.get_visual_min_temperature());
+  ESP_LOGV(TAG, "  Visual Max Temperature: %.1f°C", traits.get_visual_max_temperature());
+  ESP_LOGV(TAG, "  Visual Target Temperature Step: %.1f°C", traits.get_visual_target_temperature_step());
 
   // Send state to frontend
   this->state_callback_.call(*this);
